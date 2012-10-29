@@ -1,0 +1,42 @@
+<div class="sign_up_main_border">
+<div class="sign_up_header">Create account with Tribally</div>
+
+<table class="sign_up_page_box">
+  <td>
+    <div class="signup_main_box">
+    <%= form_for(resource, :as => resource_name, :html =>{ :autocomplete => "off"}, :url => registration_path(resource_name)) do |f| %>
+
+       <div class="sign_up_fields">
+     <%= f.label :first_name %>
+         <%= f.text_field :fname %>
+       </div>
+     
+
+      <div class="sign_up_fields"><%= f.label :last_name %>
+      <%= f.text_field :lname %></div>
+
+      <div class="sign_up_fields"><%= f.label :email %>
+      <%= f.email_field :email %></div>
+
+      <div class="sign_up_fields"><%= f.label :password %>
+      <%= f.password_field :password %></div>
+
+      <div class="sign_up_fields"><%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %></div>
+     
+<br />
+      <div class="sign_up_button_page"><%= f.submit "Creat account", :class =>'btn btn-primary' %></div>
+    <% end %>
+    </div>
+  </td>
+  <td>
+    <div class="facebook_sign_up_text">
+    <h1>Sign in with your facebook account</h1>
+    <h3>A quick way to access</h3>
+    </div>
+    <div class="facebook_connect_button"> 
+      <%= link_to image_tag("/assets/facebook_connect.png"), user_omniauth_authorize_path(:facebook, :display=>"popup"), :class => "popup", :"data-width" => 600, :"data-height" => 400 %>
+    </div>
+  </td>
+</table>
+</div>

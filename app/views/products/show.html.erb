@@ -1,0 +1,48 @@
+
+
+
+<p>
+  <b>Business name:</b>
+  <%= @product.business_name %>
+</p>
+
+<p>
+  <b>Members:</b>
+  <%= @product.members %>
+</p>
+
+<p>
+  <b>Product name:</b>
+  <%= @product.product_name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @product.description %>
+</p>
+
+<p>
+  <b>Product url:</b>
+  <%= @product.product_url %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @product.price %>
+</p>
+
+  <% @product.offers.each do |prod_offer| %>       
+    <p>   
+      <b>price discount:</b>
+      <%= prod_offer.price_discount %>
+    </p> 
+    <p>
+      <b>minimum order quantity:</b>
+      <%= prod_offer.min_no_of_buyer %>
+    </p>
+  <% end %>
+
+
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

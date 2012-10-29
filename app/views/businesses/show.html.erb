@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<%  @user.each do |each_details| %>
+<p>
+  <b>Business name:</b>
+  <%= each_details.fname %>
+</p>
+
+<p>
+  <b>Business email:</b>
+  <%= each_details.email %>
+</p>
+<%end%>
+<p>
+  <b>Website:</b>
+  <%= @business.website %>
+</p>
+<p>
+  <b>Offers history:</b>
+  <%= @business.offers_history %>
+</p>
+<p>
+  <b>invoices:</b>
+  <%= @business.invoices %>
+</p>
+<p>
+  <b>Account data:</b>
+  <%= @business.account_data %>
+</p>
+<div class="img_size">
+<%= image_tag @business.avatar %>
+</div>
+
+ 
+<%= link_to 'Edit', edit_business_path(@business) %> |
+<%= link_to 'Back', businesses_path %>

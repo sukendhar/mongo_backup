@@ -1,0 +1,12 @@
+development:
+  host: localhost
+  database: tribally_development
+  
+test:
+  host: localhost
+  database: tribally_test
+
+
+# set these environment variables on your prod server
+production:
+  uri: <%= ENV['MONGOHQ_URL'] %>

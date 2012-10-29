@@ -1,0 +1,56 @@
+<%= javascript_include_tag('messages')%>
+
+<% if !@invitee_uid.blank? %>
+  <script type="text/javascript" charset="utf-8">
+    
+    $.tribally.renderSendBox(<%= "'"+@tribe.tribe_name + "'" %>, <%= "'"+@invitee_uid.join(",") +"'"%>, <%= "'http://tribally-new.herokuapp.com/" + "'"%>, <%=  "'"+ tribe_url(@tribe) +"'"%>, fbCallback).replace("'", "");    
+    
+    function fbCallback(response){
+      if(response == null){
+        //alert("fail");
+      } else
+      {          
+        //var srt = '<%#= params[:id] %>';
+        //alert("success"+srt);
+        //jQuery.support.cors = true;
+        //$.get('/challenges/update_status_af_meg', 
+        //{thinking_abt:srt},
+        //function(data) {
+
+        //}, 'script'
+      //);
+      }
+    }
+        
+  </script>
+<% end %>
+  
+<p>
+<b>Tribe first product:</b>  
+<% @tribe.products.each do |each_product| %>
+  <%= each_product['product_name'] %>
+<% end %>
+</p>  
+<p>
+  <b>Tribe location:</b>
+  <%= @tribe.location %>
+</p>
+
+<p>
+  <b>Tribe name:</b>
+  <%= @tribe.tribe_name %>
+</p>
+
+<p>
+  <b>Tribe category:</b>
+  <%= @tribe.category %>
+</p>
+
+<p>
+  <b>Tribe members:</b>
+    <% @tribe.members.each do |each_member| %>    
+      <%= FbGraph::User.new(each_member['uid']).fetch.name %>
+      <%= image_tag(FbGraph::User.new(each_member['uid']).fetch.picture) %>
+    <% end %>
+</p>
+

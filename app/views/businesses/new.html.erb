@@ -1,0 +1,62 @@
+<h1>New business</h1>
+  <div class="business_sign_up_header">Create account with Tribally</div>
+<div class="business_container">
+  <div id="business_video"><iframe src="http://player.vimeo.com/video/26905273?title=0&amp;byline=0&amp;autoplay=0&amp;loop=0" width="560" height="320" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+  <div class="business_last_line">
+  Looking for Tribally personal accounts? click <a href="/users/sign_in">here</a>
+  </div>
+  <div class="business_signup_main_box"> 
+    <%= form_tag @business, :method => 'post' do %>
+      <div class="business_sign_up_fields">
+        <div class="business_fields1">Business name</div>
+        <%= text_field_tag :fname %>
+      </div>
+      <div class="business_sign_up_fields">
+        <div class="business_fields1">Business email address</div> 
+        <%= text_field_tag :email %>
+      </div>
+
+      <div class="business_sign_up_fields">
+        <div class="business_fields">Business web address</div>
+        <%= text_field_tag :website %>
+      </div>
+
+      <div class="business_sign_up_fields">
+        <div class="business_fields">password </div>
+        <%= password_field_tag :password %>
+      </div>
+
+      <div class="business_sign_up_fields">
+        <div class="business_fields">password confirmation </div>
+        <%= password_field_tag :password_confirmation %>
+      </div>
+    <div class="business_checkbox">
+        <%#= check_box_tag :terms %>
+       <input type="checkbox"  name="checkbox1" onclick="checkTerms();"/>
+      <p class="terms_and_conditions">
+        I have accepted the <a href="#">terms and conditions </a>for Tribally business account</p>
+    </div>
+      <div class="business_sign_up_button_page"><%= submit_tag "Create account", :class =>'create_account_btn' %></div>
+    <% end %>
+  </div>
+</div>
+  
+  <script>
+  function checkTerms() {
+     if(document.business.checkbox1.checked)
+     {
+         document.business.commit.disabled=false;
+     }
+     else
+     {
+         document.business.commit.disabled=true;
+     }
+ }
+  </script>
+
+
+    
+<%#= render 'business_signup' %>
+
+<%= link_to 'Back', businesses_path %>
+

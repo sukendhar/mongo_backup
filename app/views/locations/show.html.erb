@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @location.first_name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @location.email %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @location.phone %>
+</p>
+
+<p>
+  <b>Street address:</b>
+  <%= @location.street_address %>
+</p>
+
+<p>
+  <b>Suburb:</b>
+  <%= @location.suburb %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @location.state %>
+</p>
+
+<p>
+  <b>Postcode:</b>
+  <%= @location.postcode %>
+</p>
+
+<p>
+  <b>Map lat:</b>
+  <%= @location.map_lat %>
+</p>
+
+<p>
+  <b>Map lng:</b>
+  <%= @location.map_lng %>
+</p>
+
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

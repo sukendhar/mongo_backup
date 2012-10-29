@@ -1,0 +1,171 @@
+<div class="products_sub_container">
+  <div class="products_description_box">
+    <% if product.description.nil? %>
+     No description yet!
+    <% else %>
+      <%= product.description.nil? %>
+    <% end %>
+  </div>
+  <div class="description_dotted_line"></div>
+  <div class="products_offers_received_text">
+    Offers for <%= product.product_name %> 
+  </div>
+  <div>
+    <table class="data_table" cellpadding="0" cellspacing="0" border="0" style="opacity:1;">
+      <thead>
+        <tr>
+          <th style="width:220px; border-right:1px solid #000;">company</th>
+          <th style="width:220px; border-right:1px solid #000;">product</th>
+          <th style="width:130px; border-right:1px solid #000;">price</th>
+          <th style="width:100px; border-right:1px solid #000;">saving</th>
+          <th style="width:200px;">min #</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if product.offers.empty? %>
+            <td>no offers yet for this requested product. We're working to find great offers for your tribe soon.</td>
+         <% else %>
+           <% product.offers.each do |product_offers| %>
+            <tr style="text-align:center;"  class="products_offers_list_box">
+              <td>
+                <div class="bussiness_logo_text">
+                  Bussiness #X<br /><br />
+                  (logo)
+                </div>
+              </td>
+              <td>
+                  <div>
+                      <span class="offer_logo_box">
+                        logo<br />
+                        X
+                      </span>
+                          <div class="offer_name_text">
+                              <%=  truncate(product_offers.offer_name, length: 40) %>
+                          </div>
+                          <div class="offer_description_text">
+                              <%=  truncate(product_offers.offer_description, length: 90) %>
+                          </div>
+                  </div>
+              </td>
+              <td>
+                <div class="retails_price_text">$<%=  product_offers.retails_price %></div> 
+              </td>
+              <td>
+                <div class="offer_price_text">$<%=  product_offers.offer_price %></div>
+              </td>
+              <td>
+                <div  class="number_of_buyers_text"><%=  product_offers.min_no_of_buyer %></div>
+                <div class="members_needed_to_buy">
+                    needed to by<br />
+                    12/<%=  product_offers.min_no_of_buyer %> bought
+                </div>
+                <div><%= link_to "Accept this offer", '#', :class => 'orange_color_button'  %></div>
+              </td>  
+            </tr>
+          <%end%>
+        <% end %>
+      </tbody>
+    </table>     
+  <% if !current_user.role.empty? %>
+    <div id="offers_portal_box" class="products_offers_list_box">
+      <div class="make_an_offer_text">Make an offer for this product</div>
+         <%= form_tag create_offer_products_path, :methods => 'post' do %>
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= hidden_field_tag :tribe_id, params[:id] %>
+                <table>
+                  <td class="bussiness_logo_box">
+                      <div><%= text_field_tag :bussiness_logo %></div>
+                      <%=  link_to "Change logo", '#', :class =>'global_button'%>
+                  </td>
+                  <td class="offers_logo_box">
+                      <div><%= text_field_tag :offer_logo %></div>
+                      <%=  link_to "Upload", '#', :class =>'global_button'%>
+                  </td>
+                  <td class="prices_offers">
+                    <div class="offer_name_box">
+                        <%= text_field_tag :offer_name %>
+                        <span class="offers_name_size">Product name</span>
+                    </div><br />
+                    <div class="offer_description_text_align">
+                        <%= text_area_tag :offer_description %>
+                      <span class="offer_description_name_size">Product description</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="offer_price_text_box">
+                        <%= text_field_tag :offer_price %><br />
+                        <span class="offer_price_text_size">Offer price</span>
+                    </div>
+                    <div class="offer_retail_price_text_box">
+                        <%= text_field_tag :retails_price %><br />
+                        <span class="offer_retails_price_text_size">
+                          Retail price<br />
+                          (Original price)
+                        </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="minimum_order_text_box">
+                       <%= text_field_tag :min_no_of_buyer %><br /> 
+                       <span class="min_order_text_size">Minimum order quantity</span>
+                    </div>
+                    <div class="offers_submit_button">
+                        <%= submit_tag "Submit offer", :class =>'global_button' %>
+                     </div>
+                  </td>
+                </table>
+          <% end %>
+     </div>
+    <% end %>
+    
+     <script>
+          $(".products_offers_list_box:even").css("background-color","#D0D0D0"); 
+          $(".products_offers_list_box:odd").css("background-color","#E8E8E8"); 
+      </script>
+    </div><br />
+</div> 
+
+<div class="comments_header">Comments</div>
+<% if product.comments.empty? %>
+  <div class="No_comments_header">
+    <span class="No_comments_text">No comments yet.</span>
+    <span class="mylink" id="#<%= product._id %>">Leave a comment</span>
+  </div>
+  <div id="<%= product._id %>" class="comments_body_box" style ="display:none">
+    <%= form_tag add_comment_products_path do  %>
+      <div class="field">	      
+        <%= hidden_field_tag :product_id, product._id %>
+        <%= hidden_field_tag :user_id, current_user.uid %>
+      </div>                    
+      <div class="field">
+        <%= text_area_tag :body %>
+      </div>
+      <div class="actions">
+      <%= submit_tag("Submit") %>
+      </div>
+    <% end %>
+  </div>        
+<% else %>
+  <% product.comments.each do |product_comments| %>
+    <div class="comments_text_box">
+      <span class="comments_user_name"><%= FbGraph::User.new(product_comments.user_id).fetch.name %></span>:
+      <%= product_comments.body %>
+    </div>
+  <% end %>
+   <div class="mylink" id="#<%= product._id %>">Leave a comment</div>
+   <div id="<%= product._id %>" class="comments_body_box" style ="display:none">
+    <%= form_tag add_comment_products_path do  %>
+      <div class="field">	      
+        <%= hidden_field_tag :product_id, product._id %>
+        <%= hidden_field_tag :user_id, current_user.uid %>
+      </div>                    
+      <div class="field">
+        <%= text_area_tag :body %>
+      </div>
+      <div class="actions">
+      <%= submit_tag "Submit", :class => 'global_button' %>
+      </div>
+    <% end %>
+  </div>     
+<% end %>     
+<br />

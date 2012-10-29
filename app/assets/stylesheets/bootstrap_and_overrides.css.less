@@ -1,0 +1,132 @@
+@import "twitter/bootstrap/bootstrap";
+body { padding-top: 0px; }
+body { 
+	padding-top: 0px;
+	padding-left: 0px;
+}
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
+@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
+@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
+@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+
+// Font Awesome
+@import "fontawesome";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+.container{
+    background:#fff;
+    width: 1000px;
+    -webkit-box-shadow: 0 0 3px 1px #d7e5f1;
+    -moz-box-shadow: 0 0 3px 1px #d7e5f1;
+    box-shadow: 0 0 3px 1px #d7e5f1;
+    border: 1px solid #CADBEB;
+}
+
+.brand{
+    margin-left:5px;
+}
+
+.navbar{
+    width:940px;
+    margin-left:30px;
+}
+
+.navbar .nav > li > a{
+    color:#fff;
+    font-weight:bold;
+    font-size:17px;
+    margin-top:6px;
+    text-shadow:0 0px 0 rgba(0, 0, 0, 0.25);
+    font-family:Trebuchet MS;
+}
+
+.navbar .nav > li > a:hover{
+    color:#000;
+}
+
+.navbar .container{
+    background-color:#019BE1;
+    margin-left:-25px;
+    margin-right:-25px;
+    height:50px;
+    border:none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow:none;
+}
+
+.navbar-search .search-query{
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #fff;
+    box-shadow:none;
+    font-size:14px;
+    width:155px;
+    height: 23px;
+    border-radius:0px;
+    margin-top: 0px;
+}
+
+.dropdown .caret, .open .caret{
+    opacity: 1;
+}
+
+.dropdown .pull-right{
+    margin-left:20px;
+}
+
+.navbar .pull-right .dropdown-menu, .navbar .dropdown-menu.pull-right {
+    left: auto;
+    right: 10px;
+}
+
+.navbar-search{
+    margin-left: 20px;
+    top: 3px;
+}
+.actions
+{
+ margin-left:850px;
+ 
+}
+
+.sub_navbar .navbar{
+    width:650px;
+}
+
+.sub_navbar .navbar .container{
+    background-color:#777;
+    margin-left: -25px;
+    margin-right: -25px;
+    height:50px;
+    border:none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow:none;
+}
+
+.sub_navbar .navbar-search{
+    margin-left: 15px;
+    top: 3px;
+}

@@ -1,0 +1,58 @@
+<%= form_for @tribe, :validate => true do |f| %>
+
+<%#= current_user.facebook %>
+
+  <div class="field">    
+    <%= label_tag :product_name, "Tribe's first product<span class ='req'>*</span>".html_safe %>
+    <%= text_field_tag :product_name %>      
+  </div>
+  <div class="field">        
+    <%= f.hidden_field :created_by, :value => "#{current_user.uid}" %>      
+  </div>
+  <div class="field">
+    <%= f.label :location, "Tribe location<span class ='req'>*</span>".html_safe %>
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :tribe_name, "Tribe name<span class ='req'>*</span>".html_safe %>
+    <%= f.text_field :tribe_name %>
+  </div>
+  <div class="field">
+    <%= f.label :category, "Tribe category (optional)" %>
+    <%= f.select :category, options_for_select([  
+      ["Art and craft", "Art and craft"],
+      ["Baby", "Baby"],
+      ["Business", "Business"],
+      ["Cameras and video","Cameras and video"],
+      ["Cars/automotive", "Cars/automotive"],
+      ["Clothes and shoes", "Clothes and shoes"],
+      ["Collectables", "Collectables"],
+      ["Computers", "Computers"],
+      ["Food and drink", "Food and drink"],
+      ["Health and beauty", "Health and beauty"],
+      ["Holidays and travel", "Holidays and travel"],
+      ["Home appliances", "Home appliances"],
+      ["Home utilities", "Home utilities"],
+      ["Industry/wholesale", "Industry/wholesale"],
+      ["Jewellery", "Jewellery"],
+      ["Movies and music", "Movies and music"],
+      ["Musical instruments", "Musical instruments"],
+      ["Phones", "Phones"],
+      ["Sports/clubs", "Sports/clubs"],
+      ["Toys/hobbies", "Toys/hobbies"]
+      ]), :class => "styleselect", :include_blank => true %>
+  </div>
+  
+  <% if current_user.provider == 'facebook' %>
+    <div id="add_participant">
+      <b class="color999"></b>
+      <div id="participant">
+        <%= render :partial => 'invitations', :locals => {:form => f} %>
+      </div>
+    </div>
+  <%end%>
+    <div class="create_tribe_button"><%= f.submit "Create Tribe", :class =>'create_tribe_btn'%></div>
+<% end %>
+
+
+

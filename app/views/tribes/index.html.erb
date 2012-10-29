@@ -1,0 +1,57 @@
+  <div class="my_tribe">
+    <div class="dimension_tribe_name">All Tribes
+    </div>
+  </div>
+      <div class="search_tribe_box">
+        
+        
+          <%= form_tag tribes_path, :method => 'get' do  %>
+        <p>
+            <%= text_field_tag :search, params[:search] %>      
+            <%= submit_tag "Search", :name => nil, :class => 'global_button' %>
+        </p>
+        
+          <% end %>
+      </div>
+
+<% @tribes.each do |tribe| %>
+  <br />
+  <div class="my_tribe_page">
+     <div class="my_tribe_name_dimension">
+       <div class="my_tribe_name"><%= tribe.tribe_name %></div>
+           <div class="my_tribe_f">
+            
+              <div class="addthis_toolbox addthis_default_style"  id="fb_dimension">
+                 <a class="addthis_button_facebook_like at300b" width="80px" style="width :75px;" addthis:url=" http://localhost:3000/tribes/tribe_products?id=<%= tribe.id %>"></a>            
+                <a class="addthis_button_tweet" addthis:url="http://localhost:3000/tribes/tribe_products?id=<%= tribe.id %>"></a>
+            </div>
+            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-501a736c01ef1239"></script>
+           </div>
+      </div>
+   
+    
+     <div class="tribe_links">
+       <%=  link_to "Go to this tribe", tribe_products_tribes_path(:id => tribe), :class => 'global_button', :id => 'go_to_this_tribe' %>
+       <% tribe.members.each do |each_member| %>
+        <% if  each_member['uid'] == current_user.uid && each_member['status'] == 'thinking' %>                              
+            <%= link_to "Accept Invitation", change_invitation_status_tribes_path(:id => tribe.id, :uid => each_member['uid']), :class => 'global_button', :id => ' accept_invitation_button' %>
+        <% elsif each_member['uid'] == current_user.uid && each_member['status'] == 'accepted' %>                              
+            <%= submit_tag 'Invite Friend', :class => 'global_button', :id =>'invite_friend' %>
+   
+        <% end %>
+      <% end %>
+     </div>
+     <div class="my_details">
+        <div>
+         <%#= link_to (image_tag(FbGraph::User.new(tribe.created_by).fetch.picture, :class => 'created_user_image2' )) %>
+        </div>
+        <p class="tribe_created_text2">Tribe created by</p>
+        <p class="tribe_created_user_name2"> <%#= FbGraph::User.new(tribe.created_by).fetch.name %></p> 
+
+     </div> 
+  </div>
+  
+<% end %>
+<div class="my_tribe_last"> 
+  <p class="my_tribe_last_line">Can't see what you want? Click to <%= link_to "Create a tribe", new_tribe_path %></p>
+</div>

@@ -1,0 +1,23 @@
+<div class="sign_up_header">Sign in</div>
+
+<%= form_for(resource, :as => resource_name, :html =>{:autocomplete => "off"}, :url => session_path(resource_name)) do |f| %>
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password %></div>
+
+  <% if devise_mapping.rememberable? -%>  
+    <table>
+      <td>
+        <%= f.check_box :remember_me %>
+      </td>
+      <td>
+        Remember me
+      </td>
+    </table>
+  <% end -%><br />
+
+  <div><%= f.submit "Sign in", :class => 'btn btn-primary' %></div>
+<% end %>
+

@@ -1,0 +1,373 @@
+
+<div class="solar_offer_container">
+        <div class="solar_offer_head_dimension">
+            <div class="solar_offer_details_box">
+              <span class="solar_offer_details_text">Offerussolar.com group near XXXXX,<%= @zipcode %></span>
+            </div>
+             <div class="solar_fb_dimension">
+                  <div class="addthis_toolbox addthis_default_style"  id="fb_dimension_in_solar">
+                    <a class="addthis_button_facebook_like at300b" width="80px" style="width :75px;" ></a>
+                    <a class="addthis_button_tweet" width="80px" style="width :90px;"></a>
+                  </div>
+             </div> 
+               <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-501a736c01ef1239"></script>
+               <div class="solar_offer_count"><center class="count_number">Offers:</center></div>  
+        </div>
+      <div class="solar_offer_detailed_container">
+          <div class="solar_location_container">            
+            <%= gmaps({
+		"circles"    => { "data" => '[
+				 {"lng": -122.214897, "lat": 37.772323, "radius": 5000.000784806152880, "strokeColor": "#FF0000"},
+				]' 
+		}
+		})
+	    %>           
+          </div>
+          <div class="solar_offer_description">This is local solar i want this product how can i purchase this product can you explain me clear.</div>
+          <div class="solar_member_count_box"><br />
+            <span class="solar_number_dimension"><center>x</center></span>
+            <span class="solar_member_font"><center>people</center></span>
+          </div>
+          <div class="solar_offer_details"><br />
+            <span class="solar_offer_boxcount"><center><%= no_of_offers(@zipcode) %></center></span>
+            <span class="solar_offer_text"><center>offers</center></span>
+          </div>
+          <div class="solar_time_left_details"><br />
+            <span class="solar_time_left"><center>12</center></span>
+            <span class="solar_time_left_text"><center>days left</center></span>
+          </div>
+          
+           <% if is_member(@zipcode, current_user.uid) == true %>
+          <div class="u_r_member">You're a member!</div>
+          <div class="solar_invite_others"><center>Invite others</center></div>
+          <div class="solar_leave_this_group"><center>Leave this group</center></div>
+          <% else %> 
+          <div class="text_for_accesssing_this_tribe">You're not a member of this group yet.Fill out the 'my details' section below to get access to this group's local offers</div>
+          <% end %>
+      </div>
+  <!-- business logic -->
+   <% if !current_user.role.empty? %>
+  <div class="summary_of_buying_group">
+    <span class="buying_group_text">Summary of this buying group:</span>
+    <span class="systems_text">15 systems,total capacity:30kW</span>
+    <div class="table_size_dimension">
+      <table border="1" class="size_table">
+        <tr>
+          <th width="100px" height="50px" class="appox_font">Approx. Size(kW)</th>
+          <td width="100px"><center>1kW</center></td>
+      <td width="100px"><center>1.5kW</center></td>
+      <td width="100px"><center>2kW</center></td>
+          <td width="100px"><center>2.5kW</center></td>
+          <td width="100px"><center>3kW</center></td>
+          <td width="100px"><center>4kW</center></td>
+          <td width="100px"><center>5-7kW</center></td>
+        </tr>
+        <tr>
+          <th  width="100px" height="50px" class="appox_font">Number of members</th>
+          <td><center>4</center></td>
+          <td><center>2</center></td>
+          <td><center>3</center></td>
+          <td><center>1</center></td>
+          <td><center>2</center></td>
+          <td><center>2</center></td>
+          <td><center>2</center></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% end %>
+  <!-- end -->
+  <% if is_member(@zipcode, current_user.uid) == true %>
+     
+    <div class="offers_my_details">
+     <p class="offers_my_details_text">Your details</p><br /><br />
+         <%= form_tag do %> 
+           <div class="first_3fields">
+                 <div class="your_details_fields"><%= label_tag(:fname, "Name:") %></div>    
+                 <div class="your_details_fieldstag"><%= text_field_tag(:fname) %></div>
+
+                <div class="your_details_fields"><%= label_tag(:email, "Email:") %></div>
+                <div class="your_details_fieldstag"><%= text_field_tag(:email) %></div>
+
+                <div class="your_details_pnfields"> <%= label_tag(:phone_number, "phone number:") %></div>
+                <div class="your_details_pnfieldstag"> <%= text_field_tag(:phone_number) %></div>
+           </div>
+           <div>
+                <div class="your_details_field_address"><%= label_tag(:address, "Address:") %></div>
+                <div class="your_details_fieldstag_address"><%= text_field_tag(:address) %></div>
+                <br />
+                <div class="your_details_field_suburb"><%= label_tag(:suburb, "Suburb:") %></div>
+                <div class="your_details_fieldstag_suburb"><%= text_field_tag(:suburb) %></div>
+                <div><input type="button" value="That's my house!" class="thats_my_house"/><%#= submit_tag("Join this group") %></div>
+           </div>
+          <% end %>
+     </div>
+     
+      <div class="system_size_looking_for">
+        <p class="system_size_looking_for_text">What is the system size your looking for ?</p>
+        <p class="system_size_looking_for_desc">Tell us roughly what size system you're looking for.This will help solar companies provide offers to this group.</p>
+       <!--
+        <div class="slider"><%#= range_field_tag :range%>
+          <a class="handle" href="#" ></a>
+           <script>
+          $(":range").rangeinput();
+          </script>
+        </div>
+        <input type="range"  value="150" max="300" min="100" name="test" /> -->
+ 
+        <div class="help_me_choose"><%= link_to "Help me choose!","#" %> </div>
+        <div class="table_for_system_size">
+          <div class="iimage"><%= image_tag "/assets/i.png" %></div>
+          <div class="selecting_system_size_box">
+            <p id="you_have_selected_header">You've selected approximately 0KW.You'll receive group offers for systems around this size.</p>
+            <p id="approximate_cost">Approximate cost:</p>
+            <p id="approximate_saving">Approximate savings for day:</p>
+            <p id="green_house">Green house reduced per year:</p>
+          </div>
+        </div>
+      </div>
+
+    <div class="solar_down_border"></div>
+    <div class="solar_boxoffer_details">
+
+            <p class="text_for_offers_for_this_group">Offer for this group:</p>
+            <div class="offer_table" cellspacing="0" cellpadding="0" border="0" style="opacity:1;">
+              <span class="font_for_offer_business">Business</span>
+              <span class="font_for_offer_system_size">System size</span>
+              <span class="font_for_offer_group_discount">Group discount pricing</span>
+              <span class="font_for_offer_warrenty">Warrenty</span>
+              <span class="font_for_offer_more_info">More info</span>
+              <span class="font_for_offer_i_want_this">I want this!</span>
+            </div>
+
+
+            <div class="solar_table_container">
+               <%# if @group_details.offers.size > 0 %>
+              <div class="business_img"></div>
+              <div class="system_size"></div>
+              <div class="discount_rate"></div>
+              <div class="warrenty_display"></div>
+              <div class="more_info_display"></div>
+              <div class="i_want_this_display">
+                <input type="button" value="Choose" class="choose_button" />
+              </div>
+               <%# end %>
+            </div>          
+     </div>
+  <% else %>
+     <div class="solar_down_border"></div>
+     <div class="solar_boxoffer_details">
+
+            <p class="text_for_offers_for_this_group">Offer for this group:</p>
+            <div class="offer_table" cellspacing="0" cellpadding="0" border="0" style="opacity:1;">
+              <span class="font_for_offer_business">Business</span>
+              <span class="font_for_offer_system_size">System size</span>
+              <span class="font_for_offer_group_discount">Group discount pricing</span>
+              <span class="font_for_offer_warrenty">Warrenty</span>
+              <span class="font_for_offer_more_info">More info</span>
+              <span class="font_for_offer_i_want_this">I want this!</span>
+            </div>
+            <div class="text_for_member_signin">Offers made to this group are displayed here.You'll need to be signed in and a member of this group to view these offers.<a href="#">Sign in</a> or fill out your details above and click 'join this group' to create a free account.</div>
+      </div>       
+    
+    
+      <p class="offers_my_details_text">My details</p><br />
+      <p class="description_for_my_details">These details aren't shared wit anyone else in the group,and we'll only share your details with solar retailer if you accept this offer</p>
+      <div class="my_details_form">
+
+          <%= form_tag product_group_products_path , :methods => 'post' do %> 
+           
+           <div class="my_details_fields"><%= label_tag(:fname, "Name:") %></div>    
+           <div class="my_details_fieldstag"><%= text_field_tag(:fname) %></div>
+
+          <div class="my_details_field_email"><%= label_tag(:email, "Email:") %></div>
+          <div class="my_details_fieldstag"><%= text_field_tag(:email) %></div>
+
+          <div class="my_details_field_email"> <%= label_tag(:phone_number, "phone number:") %></div>
+          <div class="my_details_fieldstag"> <%= text_field_tag(:phone_number) %></div>
+
+          <div class="my_details_field_email"> <%= label_tag(:size, "Size of system I'm looking for:") %></div>
+          <div class="my_details_fieldstag"> <%= text_field_tag(:size) %></div><br />
+
+          <div class="my_details_field_email"><%= label_tag(:address, "Address:") %></div>
+          <div class="my_details_fieldstag"><%= text_area_tag(:address) %></div>
+
+          <div>
+            <input type="hidden" name="product[map_lat]" id="map_lat" value="" />
+            <input type="hidden" name="product[map_lng]" id="map_lng" value="" />
+          <!--  <input type="submit" value="Join this group" class="my_details_join_this_group"/>--><%= submit_tag("Join this group") %>
+          </div>
+         <% end %>
+      </div>
+ <% end %>
+
+        <div class="solar_comments_container">
+          <div class="solar_comment_text">Comments</div>
+          <%# if product.comments.empty? %>
+          <div class="solar_No_comments_header">
+            <span class="solar_No_comments_text">No comments yet.</span>
+            <span class="commentlink" id="#leave">Leave a comment</span>
+          </div>
+              <div id="leave" class="solar_comments_body_box" style ="display:none">
+              <%= form_tag do %>
+                <div class="comment_field">
+                  <%= text_area_tag :body %>
+                </div>
+                <div class="actions">
+                <%= submit_tag "Submit", :class => 'global_button' %>
+                </div>
+              <% end %>
+            </div> 
+         </div>
+      
+      <%= form_tag do  %>
+    <div class="make_an_offer_group_container">
+      <div class="make_an_offer_group_text">Make an offer to this group</div>
+      <div class="step_1_container">
+        <div class="step_1_container_text">Step-1:enter your retail pricing</div>
+    
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+         
+
+        <div class="employmentHistoryForm">
+                <span class="historyform"><center>Size</center></span>
+                <span class="historyform1"><center>Retail price</center></span>         
+          <div class ="row1">
+                <span class="table_for_size"><input type="text" name="size"/></span>
+                <span class="table_for_retail_price"><input type="text" name="retails_price" /></span>
+          <span id="deleterow"><input type="text" class="deleteThisRow"  value="- Remove"/></span>
+          </div>
+                <span class="addbuttonmore"><input type="text" id="btnAddMore"  value="+ Add a size"/></span>               
+        </div>   
+        <script type="text/javascript">
+        $(document).ready(function(){
+        var clonedRow = $('.row1').clone().html();
+        var appendRow = '<div class = "row1">' + clonedRow + '</div>';  
+
+        $('#btnAddMore').click(function(){
+              $('.employmentHistoryForm div:last').after(appendRow);
+            });
+        $('.deleteThisRow').live('click',function(){
+            var rowLength = $('.row1').length;
+            if(rowLength > 1){
+        deleteRow(this);
+        }else{
+        $('.employmentHistoryForm div:last').after(appendRow);
+        deleteRow(this);
+        }
+        });
+
+        function deleteRow(currentNode){
+        $(currentNode).parent().parent().remove();
+        }
+        });
+        </script>
+
+      </div>
+      
+      
+      
+      
+       <div class="step_2_group_container">
+         <div class="step_2_group_text">Step 2:enter your group discounts </div>
+         <div class="group_discount_table">
+           <span class="buyer_box"><center>Number of buyers</center></span>
+           <span class="discount_rate_box"><center>Bulk discount rate</center></span>
+            <div class ="row2">
+
+                <span class="adding_box_buyer"><input type="text" name="min_no_of_buyer"/></span>
+                <span class="adding_bulk_discount"><input type="text" name="offer_price"/></span>
+                <span id="deleterow_for_discount"><input type="text" class="deleteThis"  value="- Remove"/></span>
+            </div>
+                <span class="Add_morebutton"><input type="text" id="btnAdd"  value="+ Add a size"/></span>
+         </div>
+         <script type="text/javascript">
+        $(document).ready(function(){
+        var clonedRow = $('.row2').clone().html();
+        var appendRow = '<div class = "row2">' + clonedRow + '</div>';  
+
+        $('#btnAdd').click(function(){
+              $('.group_discount_table div:last').after(appendRow);
+            });
+        $('.deleteThis').live('click',function(){
+            var rowLength = $('.row2').length;
+            if(rowLength > 1){
+        deleteRow(this);
+        }else{
+        $('.group_discount_table div:last').after(appendRow);
+        deleteRow(this);
+        }
+        });
+
+        function deleteRow(currentNode){
+        $(currentNode).parent().parent().remove();
+        }
+        });
+        </script>
+       </div>
+    
+     </div>
+      <div class="step_3_container">
+        <div class="step_3_text">Step 3: Describe possible fixed extra costs (ETSA meter,tiled roof)</div>
+        <div class="fixed_extra"><%= text_area_tag(:fixedextra) %></div>
+        <div class="fixed_extra_rate_desc">In making this offer,you are offering this group range of discounts on your retail pricing according to how many group members accept your offer.If customers click to accept your offer,it will be expected that you will honour your group discounts when group coustomers contact you to redeem their offer
+          <br /><br />
+          If your group offer is accepted by this offerussolar group,we wil share the details of group members that accepted your offer with you, an dyour business will be changed $75 per group member.
+          <br /><br />
+          For full business terms and conditions,click <a href="#">here</a>
+        </div>
+        <div class="make_offer"><input type="submit" value="Make offer" class="global_button"/></div>
+      </div>
+      <% end %>
+    
+</div>
+<script>
+ $(function(){
+   $('.commentlink').click(function(event){      
+      $(event.target.id).toggle();      
+   });
+});
+</script>
+
+
+     
+     <% comment do %> 
+           <div class="business_post_form">
+             
+           <%= form_tag( :html => { :multipart => true }) do |f|  %>
+             
+                  <div class="business_image">
+                  <p class="font_for_edit_form">logo</p> 
+                  <%= file_field_tag "avatar" %>
+                  </div>
+                 <div class="system_size_post">
+
+                    <div class="system_size_field"><%= text_field_tag :system_size %></div>
+                    <p class="font_for_edit_form">System size</p>
+                 </div>
+                 <div class="group_discount_price">
+
+                   <div class="group_discount_price_field"><center>
+                   <%= text_field_tag :group_discount_price %></center>
+                   </div>
+                   <center class="font_for_edit_form">Group discount price</center>
+                 </div>
+                 <div class="warrenty">
+
+                    <div class="warrenty_field"><%= text_field_tag :warrenty %></div>
+                    <center class="font_for_edit_form"> warrenty</center>
+                 </div>
+                 <div class="more_info">
+
+                   <div class="more_info_text"><%= text_field_tag :more_info %></div>
+                   <center class="font_for_edit_form">More info</center>
+                 </div>
+                  <div class="edit_form_create_button">
+                    <center><%= submit_tag :Create%></center>
+                  </div>
+           <% end %>
+             
+           </div>
+     
+   <% end %>

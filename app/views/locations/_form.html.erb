@@ -1,0 +1,50 @@
+<%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false",'google_location' %>
+
+<%= form_tag locations_path, :methods => 'post' do %>
+  <div id="gmap-dot"></div>
+  <div class="container-plain"></div>
+  <div class="field" >
+     Name: <input type="text" name="location[first_name]" value="" />
+  </div>
+  <div class="field">
+    Email: <input type="text" name="location[email]" value="" />
+  </div>
+  <div class="field">
+    Phone number: <input type="text" name="location[phone]" value="" />
+  </div>
+  <div class="field">
+    Address: <input type="text" name="location[street_address]" value="" id="street_address" />
+  </div>
+  <div class="field">
+     Suburb: <input type="text" name="location[suburb]" value=""  id="suburb" />
+  </div>
+  <div class="field" style="display:none;">
+          <select name="location[state]" id="state" style="width: 210px;">
+                  <option value=""></option>
+                  <option value="ACT" >ACT</option>
+                  <option value="NSW" >NSW</option>
+                  <option value="NT" >NT</option>
+                  <option value="QLD" >QLD</option>
+                  <option value="SA" >SA</option>
+                  <option value="TAS" >TAS</option>
+                  <option value="VIC" >VIC</option>
+                  <option value="WA" >WA</option>
+          </select>
+  </div>
+  <div class="field">
+     Postcode:<input type="text" name="location[postcode]" value="" id="postcode_quote" />
+  </div>
+  <div class="field">
+      <span class="formlabel">Locate Your Property:</span>
+  </div>
+  <div class="field">
+     <div  id="map_container" style="height: 350px; width:930px;"></div>
+  </div>
+  <div class="field" style=" margin-top: 25px; text-align: center;">
+    <input type="hidden" name="location[map_lat]" id="map_lat" value="" />
+    <input type="hidden" name="location[map_lng]" id="map_lng" value="" />
+    <input type="submit" name="location[submit1]" value="That's my house!"/> 
+  </div>
+
+<% end %> 
+ 

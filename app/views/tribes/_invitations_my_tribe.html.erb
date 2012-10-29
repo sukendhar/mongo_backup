@@ -1,0 +1,53 @@
+<%= stylesheet_link_tag('jquery.facebook.multifriend.select.css')%>
+<%= javascript_include_tag('jquery.facebook.multifriend.select') %>
+
+  <%= form_tag invite_friend_tribes_path do -%>
+ 
+    <span>
+        <input id = "aaaa" type="button" value="Invite Friend" class="<%= tribe.id %> global_button invite_friendbutton"/>
+      <%= text_field_tag :invitees, nil , :id => "invitees_id", :class=> "hidden" %>
+        <div id="jfmfs-container-wrapper" style="display: none">
+        <div id="jfmfs-container">
+        </div>
+        </div>
+    </span>
+  
+
+
+<script type="text/javascript" charset="utf-8">
+(function($j) {
+  var selectorObz = {
+    filter_default: "Search By Name",
+    friend_fields: "id,name,last_name&access_token="+'<%= current_user.facebook.access_token%>'
+  }
+
+  $j('.<%= tribe.id %>').live('click', function(){
+    $j( "#jfmfs-container-wrapper" ).dialog({
+      modal: true,
+      resizable: false,
+      closeText: "",
+      position: 'center',
+      title: 'Invite Participants',
+      width: '726px',
+      open: function(event, ui) { $j("#jfmfs-container").jfmfs(selectorObz); },
+      buttons: {
+  Invite: function() {
+                var friendSelector = $j("#jfmfs-container").data('jfmfs');
+                var selectedFriends = friendSelector.getSelectedIds();
+                $j('#invitees_id').val(selectedFriends);
+                $j('form').submit();
+                $j(this).dialog( "close" );
+              },
+        Cancel: function() {
+                $j("#jfmfs-container").data('jfmfs').clearSelected();
+                $j('#aaaa').val("Invite Friend");
+                $j(this).dialog( "close" );
+              }
+
+      }
+    });
+  })
+})(jQuery);
+</script>
+
+<% end %>

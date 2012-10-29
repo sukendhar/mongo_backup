@@ -1,0 +1,228 @@
+<table>
+  <td class="my_tribe_name_dimension2">
+    <div class="tribe_name_box"><%= @tribe.tribe_name %>
+    
+     <div class="addthis_toolbox addthis_default_style"  id="fb_dimension">
+         <a class="addthis_button_facebook_like at300b" fb:like:layout="button_count" style="width :75px;"></a>
+        <a class="addthis_button_tweet" id ="t_dimension"></a>
+        
+     </div>
+      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-501a736c01ef1239"></script>
+      </div>
+  </td>
+  
+      
+  
+  <td class="add_friends_to_tribe">
+     <div>
+      <%= total_tribe_member(@tribe) %> members<br />
+      <!--
+      <script>
+        $(function() {
+          $( "#autocomplete-input" ).autocomplete({
+            source: function( request, response ) {
+            $.ajax({
+              url: "https://graph.facebook.com/me/friends?access_token=<%= current_user.token %>&callback=?",
+              dataType: "jsonp",
+              data: {
+              width: 250,
+              height: 400,
+              max: 8,
+              cacheLength: 10,
+              minChars: 1,
+                featureClass: "P",
+                style: "full",
+                maxRows: "5",
+                name_startsWith: request.term
+              },
+              success: function( data ) {
+                res = $.map( data.data, function( item ) {
+                  if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
+                    return {
+                      label: item.name,
+                      value: item.id
+                    }
+                  }
+                });
+                response(res);
+              }
+            });
+          },
+          minLength: 0,
+          select: function( event, ui ) {
+            // log( ui.item ?
+            // "Selected: " + ui.item.label :
+            // "Nothing selected, input was " + this.value);
+          },
+          open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+          },
+          close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+          }
+          });
+         
+         $("#autocomplete-input").data("autocomplete")._renderItem =  function( ul, item ) {
+           var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+           return $( "<li style='height:40px;'>" ).append($("<img style='float:left;height:35px;'>").attr('src',image_url))
+           .append( $( "<a>" ).text( item.label ) )
+           .appendTo( '#friendslist' );
+         }
+        });
+      </script>
+      <ul>
+        <li>
+         <input id="autocomplete-input" />
+        </li>
+      </ul>
+      <div id="friendslist"></div> 
+      -->
+      <input type="text" class="input_fb_user_name" placeholder="+Add Friends to group"/>
+    </div>
+    <%= link_to 'Invite friends', "#", :class =>'orange_color_button_a' %>
+        
+    <%= link_to 'Leave this tribe', "#", :class =>'orange_color_button_a' %>  
+  </td>
+  <td>
+    <section id="tribe_create">
+      <table>
+        <td>
+          <%= link_to (image_tag(FbGraph::User.new(@tribe.created_by).fetch.picture, :class => 'created_user_image' )) %>
+        </td>
+        <td>          
+          <div class="tribe_created_text">Tribe created by:</div>
+          <div class="tribe_created_user_name"> <%= FbGraph::User.new(@tribe.created_by).fetch.name %></div>
+          
+         
+          <table cellpadding="0" cellspacing="0" width="133" class="created_user_ratings">
+          <tr>
+            <td>
+              <iframe src="http://www.ratingcode.com/show.php?id=13442292269&st=2&bg=FFFFFF" border="0" width="115" height="37" marginwidth="0" margin-left="60px" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bgcolor=FFFFFF ></iframe>
+            </td>
+            </tr>
+          </table>
+
+        </td>
+      </table>
+    </section>
+  </td>
+</table>
+
+<div class="request_product_box">  
+  <table>
+    <td>
+      <%= link_to image_tag("/assets/plus_icon.png", :class => 'plus_icon') %>
+    </td>      
+    <td>
+      <div class="request_input_box_border">        
+        <%= text_field_tag 'search', nil, :class => 'request_input_box', :placeholder => 'Search product' %>
+      </div>
+    </td>                  
+    <%= form_tag("/products", :method => "post") do %>
+      <td width="300" align="center">        
+        <%= submit_tag 'Request new product', :class =>'global_button' %>
+      </td>
+      <td>      
+        <%= hidden_field_tag :tribe, @tribe._id %>
+        <%= text_field_tag 'product_name', nil, :class => 'request_input_box', :placeholder => 'Request new product' %>      
+      </td>
+    <% end %>
+  </table>       
+</div><br />
+<% product_count = 0 %>
+<% @tribe.products.each do |product| %>  
+  <div class="products_main_container">
+    <div class="product_offers_time_box">
+      <table>
+          <td>
+           <% if product_count == 0 %>
+              <div class="show_hide_box">
+                <input type="button" value = 'Hide' class="button" id = "<%= product.id %>aaa" />
+            <% else %>
+                <input type="button" value = 'Show' class="button" id = "<%= product.id %>aaa" />              
+              </div>
+            <% end %> 
+             <script>
+              $('document').ready(function(){
+                $("#<%= product.id %>aaa").css('background',"url(/assets/loginArrow.png) no-repeat 8px -87px");
+                $("#<%= product.id %>aaa").click(function(){
+                  
+                  var attr_value = $('#<%= product.id %>aaa').attr('value');      
+                  $("#<%= product.id %>aaaa").toggle('fast');
+                  
+                  if(attr_value == 'Hide')
+                    {          
+                      $("#<%= product.id %>aaa").attr('value','Show');
+                      $("#<%= product.id %>aaa").css('background',"url(/assets/loginArrow.png)no-repeat 8px -5px");
+                    }
+                    else if(attr_value == 'Show'){          
+                      $("#<%= product.id %>aaa").attr('value','Hide');
+                      $("#<%= product.id %>aaa").css('background',"url(/assets/loginArrow.png) no-repeat 8px -87px");
+                    }
+                });    
+              });
+            </script>
+          </td>
+          <td>
+            <div class="product_offers_small_box">
+              <table style="margin-top:7px;">
+                  <td style="width:200px;">
+                    <span class="product_offers_box_text">Product</span><br/>
+                    <span class="product_offers_box_text2"><%= truncate(product.product_name, length: 20) %></span>
+                  </td>
+                  <td style="width:80px; text-align:center;">
+                    <span class="product_offers_box_text">Offers</span><br />
+                    <span  class="product_offers_box_text3"><%= product.offers.count %></span>
+                  </td>
+              </table>
+            </div>
+          </td>
+          <td>
+            <div class="products_want_this_box">
+              <div class="wants_box"> 
+                <span class="want_number"><%# @ad = no_of_wants(params[:id], product.product_name, current_user.uid )  %></span>
+                <%#= @ad.size %><br/><span class="size">Wants this</span>              
+                <div class="i_want_this">
+                  <%= link_to "I want this", tribe_products_tribes_path(:id => params[:id], :product_name => product.product_name), :class => 'global_button' %>                
+                </div>
+              </div> 
+            </div>
+          </td>
+          <td>            
+            <div class="products_contdown_time_box"> 
+              <div id="time_left_to_open">
+                <div id="<%= product.id %>a"></div>
+              </div>
+               <div id="time_left_to_open"></div>               
+               <div id="<%= product.id %>a"></div>  
+               <div id="time"><b>OPEN</b></div>
+               <script>
+                 var newYear = new Date(); 
+                 newYear = new Date(newYear.getFullYear() + 1, 1 - 1, 1);                 
+                 $('#<%= product.id %>a').countdown({until: newYear, format: 'dHMS'}); 
+               </script>
+            </div>
+          </td>
+        </table>
+    </div>
+    <% if product_count == 0 %>
+      <div  id="<%= product.id %>aaaa">
+        <%= render 'product_details', :product => product %>
+      </div>
+    <% else %>
+      <div  id="<%= product.id %>aaaa" style="display: none">
+        <%= render 'product_details', :product => product %>
+      </div>
+    <% end %>
+    
+    <% product_count += 1 %>
+  </div><br />
+<% end %>
+
+<script>
+ $(function(){
+   $('.mylink').click(function(event){      
+      $(event.target.id).toggle();      
+   });
+});
+</script>

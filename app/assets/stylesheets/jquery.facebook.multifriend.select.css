@@ -1,0 +1,241 @@
+/*
+Copyright 2010 Mike Brevoort http://mike.brevoort.com @mbrevoort
+
+v1.0 jquery-facebook-multi-friend-selector
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+
+#ui-dialog-buttonset{
+    border-style:solid #ccc;
+    border-width:1px #ccc; 
+}
+#jfmfs-friend-selector input {
+    background-color: #fcfcfc;
+    border: 1px solid #ccc;
+    font: 11px verdana, arial, helvetica, sans-serif;
+    margin: 2px 0;
+    padding: 2px 4px;
+
+}
+.jfmfs-friend {                
+    cursor:pointer;
+    display:block;
+    float:left;
+    height:56px;
+    margin:3px;
+    padding:4px;
+    width:126px;
+    border: 1px solid #FFFFFF;
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	overflow:hidden;
+}
+
+.jfmfs-friend img {
+    border: 1px solid #CCC;
+    float:left;
+    margin:0;
+}
+
+.jfmfs-friend.selected img {
+    border: 1px solid #98D4F9;
+}
+
+.jfmfs-friend div {
+    color:#111111;
+    font-size:11px;
+    overflow:hidden;
+    padding:2px 0 0 6px;
+}
+
+#jfmfs-friend-container {
+    overflow:scroll;
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
+    width:100%;
+    height:400px;  
+    font-family: arial;
+    color: #333;
+    font-size: 12px;
+    background: none repeat scroll 0 0 #F7F7F7;
+    color: #7F7F7F;
+}
+
+#jfmfs-friend-selector {
+    width:724px;   
+    height:376px;
+    overflow-y:hidden;  
+    margin-top:50px;  
+    border-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-color: #7f7f7f;       
+}
+
+#jfmfs-inner-header {
+    background:none repeat scroll 0 0 #F7F7F7;
+    
+    color: #7f7f7f;
+    font-size:11px;
+    font-weight:bold;
+    height:25px;
+    padding:10px;
+}
+
+.jfmfs-friend.selected {
+    background-color: #98D4F9;
+    border: 1px solid #98D4F9;
+    border-radius:5px;
+    
+    background: #6D84B4; /* for non-css3 browsers */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#98D4F9', endColorstr='#BFF2FF'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#98D4F9), to(#BFF2FF)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #98D4F9,  #BFF2FF); /* for firefox 3.6+ */    
+}
+
+.jfmfs-friend.selected div {
+    color: #111111;
+}
+
+.hover {
+    background-color: #EFF2F7;
+}
+
+.hide-non-selected, .hide-filtered {
+    display: none;
+}
+
+div.jfmfs-button {
+    background:none repeat scroll 0 0 #6D84B4;
+    border:1px solid #3B5998;
+    color:white;
+    cursor:pointer;
+    margin:4px 5px 0 4px;
+    padding:2px 5px;
+    text-decoration:none;
+}
+
+#jfmfs-friend-selector a.filter-link:link, a.filter-link:visited {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#jfmfs-friend-selector a.filter-link:hover, #jfmfs-friend-selector a.selected {
+    background-color: #98D4F9;
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+    color: #FFFFFF;
+    border-radius:6px;
+}
+
+#jfmfs-friend-selector .filter-link {
+    margin:4px 5px 4px 5px;
+    padding:3px 5px 3px 5px;
+}
+
+#jfmfs-inner-header .filter-link {
+    float:right;
+}
+
+#jfmfs-inner-header div.jfmfs-button-hover {
+    text-decoration: underline;
+}
+
+
+#jfmfs-friend-filter-text {
+    height: 23px;
+	width: 70%;
+}
+
+
+#jfmfs-inner-header span.jfmfs-title {
+    color: #333333;
+    font-weight: bold;
+    margin: 3px 0 2px;
+}
+
+#jfmfs-max-selected-wrapper {
+    float: right;
+    margin:4px 5px 4px 5px;
+    padding:3px 5px 3px 5px;  
+}
+
+.ui-dialog-buttonset{
+text-align: left;
+border-width: 1px 0 0 0;
+background-image: none;
+margin-left:590px;
+padding: .3em 1em .5em .4em;
+}
+.ui-dialog-buttonset button{
+         -moz-box-shadow:inset 0px 0px 0px 0px #bbdaf7;
+	-webkit-box-shadow:inset 0px 0px 0px 0px #bbdaf7;
+	box-shadow:inset 0px 0px 0px 0px #bbdaf7;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05,  #79bbff), color-stop(1, #378de5) );
+	background:-moz-linear-gradient( center top,  #79bbff 5%, #378de5 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+	background-color:#79bbff;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:12px;
+	font-weight:normal;
+	padding-top: 3px;
+        padding-bottom: 3px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc;
+        margin-right: 5px;
+}
+.ui-dialog-buttonset button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+	background-color:#378de5;
+                text-decoration:none;
+                color:#fff;
+}
+.ui-dialog-buttonset button:active {
+	position:relative;
+	top:1px;
+}
+
+div.ui-dialog{
+    border: 2px solid #7F7F7F;/*{borderColorContent}*/
+    background: none repeat scroll 0 0 #F7F7F7;
+    color: #7F7F7F;
+    color: rgb(34, 34, 34);/*{fcContent}*/
+    margin-top:0px;
+    margin-bottom: -1800px;
+
+    border-radius: 5px;
+}
+
+.ui-dialog-titlebar{
+    height:20px;
+    background: none repeat scroll 0 0 #98D4F9;
+    margin-bottom:-50px;
+    padding-left: 10px;
+    padding-top: 6px;
+    font-weight: bold;
+}

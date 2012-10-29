@@ -1,0 +1,47 @@
+
+
+
+<%= form_for(@business , :html => { :multipart => true }) do |f|  %>
+  <%  @user.each do |user| %>
+      <%#=user.fname %>
+ 
+      <div class="field">
+      <%= f.label :business_name %>
+      <%#= f.text_field :fname %>    
+      <input type="text" value="<%= user.fname %>" />
+      </div>
+
+     <div class="field">
+      <%= f.label :business_email %>
+       <%#= f.text_field :email %>
+       <input type="text" value="<%= user.email %>" /> 
+     </div>
+  <% end %>
+      <div class="field">
+        <%= f.label :website %>
+        <%= f.text_field :website %>
+      </div>
+      <div class="field">
+        <%= f.label :offers_history %>
+        <%= f.text_field :offers_history %>
+      </div>
+
+      <div class="field">
+        <%= f.label :invoices %>
+        <%= f.text_field :invoices %>
+      </div>
+      <div class="field">
+        <%= f.label :Account_data %>
+        <%= f.text_field :account_data %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :avatar %><br />
+        <%= f.file_field :avatar %>
+      </div>
+    
+       <div class="actions">
+          <%= f.submit %>
+       </div>
+ <% end %>
+  

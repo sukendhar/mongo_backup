@@ -1,0 +1,34 @@
+<%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false",'google_map' %>
+<div class="group_text_header">
+    <div class="group_location_text">Showing group near <%= params[:zipcode]  %> ,South Australia</div>
+    <div class="group_offer_post_code_text">Postcode</div>
+    <div class="group_offer_post_code_input_box">
+      <input type="text" />
+    </div>
+    <div class="group_post_search"><input type="button" value="search"/></div>
+</div><br /> <br/>
+<div class="new_group_text">You're the first in this area to participate in an offersolar community buying program! </div>
+  <div class="new_group_details_container">
+      
+
+      <div class="new_location_of_group"><div  id="map_container" data-latitude="<%= @searched_group.map_lat %>" data-longitude="<%= @searched_group.map_lng %>"style="width: 240px;height: 195px;"></div>
+<%#= image_tag "http://maps.google.com/maps/api/staticmap?center=37.386052,-122.083851&zoom=13&markers=37.386052,-122.083851&size=572x470&sensor=false" %> </div>
+      <div class="new_location_of_country">
+        Join a new group for Adelaide,<%= params[:zipcode] %> South Australia
+      </div>
+      <div class="new_description_for_tribe">If this is your area,click 'Get Started' with your local solar buying group.We'll help the group grow  and attract great group discount.</div>
+
+        <div class="new_group_box"><br />
+          <span class="group_font"><center>new group</center></span>
+        </div>
+      <div class="new_offer_details"><br />
+        <span class="new_offer_count"><center>0</center></span>
+        <span class="new_offer_text"><center>offers</center></span>
+      </div>
+      <div class="time_left_details"><br />
+        <span class="time_left"><center>12</center></span>
+        <span class="time_left_text"><center>days left</center></span>
+      </div>
+      <div class="get_started_btn"><input type="button" value="Get started!" /></div>
+    
+   </div>

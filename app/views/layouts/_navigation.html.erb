@@ -1,0 +1,102 @@
+<table class="main_navigation">
+  <td>
+    <%= link_to image_tag("/assets/offerus_main_logo.png"), root_path, :class => 'brand' %>
+  </td>
+ 
+  <td class="login_navigation">
+    <% if user_signed_in? %>
+      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>           
+    <% else %> 
+      <div id="loginContainer">
+        <div id="loginButton">
+          <div class="span">Login</div>
+        </div>
+          <div style="clear:both"></div>
+          <div id="loginBox">
+            <div class="main_loginForm">
+              <div id="loginForm">
+                <% if defined? resource %>
+                 <%= form_for(resource, :as => resource_name, :html =>{ :autocomplete => "off"}, :url => session_path(resource_name)) do |f| %>
+                  <div class="signin_input"><%= f.email_field :email, :placeholder => 'Email' %></div>
+
+                  <div  class="signin_input"><%= f.password_field :password, :placeholder => 'Password' %></div>
+                      
+                  <div class="login_checkbox">
+                    <% if devise_mapping.rememberable? -%>
+                      <table>
+                      <td>
+                        <%= f.check_box :remember_me %>
+                      </td>
+                      <td>
+                        Remember me
+                      </td>
+                      </table>
+                    <% end -%>
+                  </div>
+                </div>
+                  <div class="sign_in_btn_window">
+                    <%= f.submit "Sign in", :class => 'btn btn-primary' %>
+                  </div>
+                  <% end %>
+                  <div class="forget_password_text">
+                    <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+                      <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                    <% end -%>
+                  </div>
+                  <% end %> 
+            </div>
+          </div>
+      </div>
+    <% end %>
+  </td>
+  
+  <td class="sign_up_navigation">
+    <% if user_signed_in? %>
+      <%= link_to 'Edit account', edit_user_registration_path %>
+      <% if current_user.has_role? :admin %>
+        <%= link_to 'Admin', users_path %>
+      <% end %>
+    <% else %>
+      <%= link_to image_tag("/assets/facebook_login.png"), user_omniauth_authorize_path(:facebook, :display=>"popup"), :class => "popup facebook_navigation_top", :"data-width" => 600, :"data-height" => 400 %>
+      <%= link_to 'Sign up', new_user_registration_path %>
+    <% end %>
+  </td>
+</table>
+<div id="fb-root"></div>
+  <script>  										       
+    window.fbAsyncInit = function() {
+      FB.init({     
+        appId      : '395920417135166', // App ID
+        //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+
+      // Additional initialization code here
+    };
+
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      d.getElementsByTagName('head')[0].appendChild(js);
+      }(document));
+
+    // Load the SDK Asynchronously
+    function popupCenter(url, width, height, name) {
+    var left = (screen.width/2)-(width/2);
+    var top = (screen.height/2)-(height/2);
+    return window.open(url, name, "menubar=no,toolbar=no,status=no,width="+width+",height="+height+",toolbar=no,left="+left+",top="+top);
+    }
+
+    $("a.popup").click(function(e) {
+      popupCenter($(this).attr("href"), $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
+      e.stopPropagation(); return false;
+    });
+    if(window.opener) {
+        window.opener.location.reload(true);
+        window.close()
+      }
+  </script>

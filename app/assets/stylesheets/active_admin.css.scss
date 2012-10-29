@@ -1,0 +1,97 @@
+// Active Admin CSS Styles
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+// To customize the Active Admin interfaces, add your
+// styles here:
+
+a, a:link, a:visited{
+    text-decoration:none;
+}
+body{
+	font-size:14px!important;
+}
+body.logged_out #content_wrapper #active_admin_content {
+	border-radius: 5px;
+}
+body.logged_out h2{
+	background:#019BE1;
+	text-shadow:none;
+	-webkit-box-shadow:none;
+	line-height: 25px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+body.logged_out #login a {
+	text-decoration: none;
+}
+input#admin_user_submit.create{
+	background:#019BE1;
+	border:none;
+	border-radius:5px;
+	height: 30px;
+	text-shadow:none;
+	-webkit-box-shadow:none;
+}
+input#admin_user_submit.create:hover{
+	color: #444;
+	background: #FDFDFD;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FDFDFD), to(#EAEAEA));
+	background: -moz-linear-gradient(-90deg, #FDFDFD, #EAEAEA);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd, endColorstr=#eaeaea);
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd, endColorstr=#eaeaea);	
+}
+form input[type="submit"]{
+	background:#019BE1;
+	border:none;
+	border-radius:5px;
+	height: 30px;
+	text-shadow:none;
+	-webkit-box-shadow:none;
+	margin-top:2px;	
+}
+form input[type="submit"]:hover{
+	color: #444;
+	background: #FDFDFD;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FDFDFD), to(#EAEAEA));
+	background: -moz-linear-gradient(-90deg, #FDFDFD, #EAEAEA);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd, endColorstr=#eaeaea);
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd, endColorstr=#eaeaea);	
+}
+form fieldset.buttons li.cancel a{
+	background:#019BE1;
+	border:none;
+	color:#fff;
+	border-radius:5px;
+	text-shadow:none;
+	-webkit-box-shadow:none;
+	margin-top:2px;
+	line-height: 18px;
+}
+form fieldset.buttons li.cancel a:hover {
+	color: #444;
+	background: #FDFDFD;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FDFDFD), to(#EAEAEA));
+	background: -moz-linear-gradient(-90deg, #FDFDFD, #EAEAEA);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd, endColorstr=#eaeaea);
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd, endColorstr=#eaeaea);
+}
+#header{
+	background:#019BE1;
+	text-shadow:none;
+}
+#header h1{
+	color:#fff;
+}
+#header ul#tabs > li a{
+	color:#fff;
+}
+#header #utility_nav span, #header #utility_nav{
+	color:#fff;
+}
+#header ul#tabs > li.current > a{
+	background:#7B8389;
+}
+#footer{
+	display:none;
+}
