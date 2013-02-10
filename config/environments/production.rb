@@ -75,8 +75,8 @@ Tribally::Application.configure do
     :port => 587,
     :domain => "gmail.com",
     :authentication => :login,
-    :user_name => 'triballymaisa@gmail.com',
-    :password => 'maisa1234',
+    :user_name => '',
+    :password => '',
   }
 
 
